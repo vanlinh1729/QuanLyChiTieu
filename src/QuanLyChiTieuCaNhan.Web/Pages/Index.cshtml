@@ -1,0 +1,25 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using QuanLyChiTieuCaNhan.Localization
+@using Volo.Abp.Users
+@model QuanLyChiTieuCaNhan.Web.Pages.IndexModel
+@inject IHtmlLocalizer<QuanLyChiTieuCaNhanResource> L
+@inject ICurrentUser CurrentUser
+@section styles {
+<abp-style src="/Pages/Index.css" />
+}
+@section scripts {
+<abp-script src="/Pages/Index.js" />
+}
+
+<abp-card>
+    <div class="row">
+        <input placeholder="Nhập tên Wallet..." type="text"  id="walletNameInput" class="col-md-2 m-2 form form-control-lg"/>
+            <abp-button class="col-md-2 m-2" id="NewWalletButton"
+                        text="@L["CreateWallet"].Value"
+                        icon="plus"
+                        button-type="Primary"/>
+    </div>
+    
+    <div class="row m-2" id="listWallet"></div>
+</abp-card>

@@ -1,0 +1,57 @@
+@page
+@using QuanLyChiTieuCaNhan.Permissions
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using QuanLyChiTieuCaNhan.Web.Pages.Transactions.Transaction
+@using QuanLyChiTieuCaNhan.Localization
+@using QuanLyChiTieuCaNhan.Web.Menus
+@model IndexModel
+@inject IPageLayout PageLayout
+@inject IHtmlLocalizer<QuanLyChiTieuCaNhanResource> L
+@inject IAuthorizationService Authorization
+@{
+    PageLayout.Content.Title = L["Transaction"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:Transaction"].Value);
+    PageLayout.Content.MenuItemName = QuanLyChiTieuCaNhanMenus.Transaction;
+}
+
+@section scripts
+{
+    <abp-script src="/Pages/Transactions/Transaction/index.js" />
+}
+@section styles
+{
+    <abp-style src="/Pages/Transactions/Transaction/index.css"/>
+}
+
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@L["Transaction"]</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-end">
+			    @if (await Authorization.IsGrantedAsync(QuanLyChiTieuCaNhanPermissions.Transaction.Create))
+                {
+                <abp-button id="NewTransactionButton"
+                            text="@L["CreateTransaction"].Value"
+                            icon="plus"
+                            button-type="Primary" />
+                }
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-row class="mb-3">
+            <a abp-collapse-id="TransactionCollapse" class="text-secondary">@L["TableFilter"] </a>
+        </abp-row>
+        <abp-dynamic-form abp-model="TransactionFilter" id="TransactionFilter" required-symbols="false" column-size="_3">
+            <abp-collapse-body id="TransactionCollapse">
+                <abp-form-content />
+            </abp-collapse-body>
+        </abp-dynamic-form>
+        <hr />
+        <abp-table striped-rows="true" id="TransactionTable" class="nowrap"/>
+    </abp-card-body>
+</abp-card>

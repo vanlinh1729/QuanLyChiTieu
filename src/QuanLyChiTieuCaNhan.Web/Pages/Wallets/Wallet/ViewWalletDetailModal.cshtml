@@ -1,0 +1,28 @@
+@page
+@using QuanLyChiTieuCaNhan.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal;
+@inject IHtmlLocalizer<QuanLyChiTieuCaNhanResource> L
+@model QuanLyChiTieuCaNhan.Web.Pages.Wallets.Wallet.EditModalModel
+@{
+    Layout = null;
+}
+<abp-dynamic-form abp-model="ViewModel" data-ajaxForm="true" asp-page="EditWalletModal">
+<abp-modal size="Fullscreen">
+    <abp-modal-header><h3 id="walletName"></h3></abp-modal-header>
+    <abp-modal-body>   
+        
+        <div class="row text-center mb-3"> <!-- Center-align the content -->
+                   <h1 class="fw-bolder">CÔNG TY TNHH TẬP ĐOÀN T&H VIỆT NAM</h1>
+        <h3 id="AttendentMonth"></h3>
+        </div>
+        <abp-table class=" table table-responsive" id="attendentForMonthDetailTable"></abp-table>
+        
+    </abp-modal-body>
+    <abp-modal-footer buttons="@(AbpModalButtons.Close)">
+          @*
+          <button class="btn btn-primary" id="exportAttendentForMonthPdfButton">Export to PDF</button>
+    *@
+    </abp-modal-footer>
+</abp-modal>
+</abp-dynamic-form>
